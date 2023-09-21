@@ -128,11 +128,11 @@ def print_to_file(filename, unique_list_finished):
         lines += 1
     f.close()
     print(
-        "[+] Saving dictionary to \033[1;31m"
+        "[+] Zapisano słownik do \033[1;31m"
         + filename
-        + "\033[1;m, counting \033[1;31m"
+        + "\033[1;m, słownik posiada \033[1;31m"
         + str(lines)
-        + " words.\033[1;m"
+        + " potencjalnych haseł.\033[1;m"
     )
     inspect = input("> Hyperspeed Print? (Y/n) : ").lower()
     if inspect == "y":
@@ -305,70 +305,70 @@ def interactive():
     """Implementation of the -i switch. Interactively question the user and
     create a password dictionary file based on the answer."""
 
-    print("\r\n[+] Insert the information about the victim to make a dictionary")
-    print("[+] If you don't know all the info, just hit enter when asked! ;)\r\n")
+    print("\r\n[+] Wprowadź informacje o ofierze, aby utworzyć słownik.")
+    print("[+] Jeśli nie znasz wszystkich informacji, po prostu naciśnij Enter! ;)\r\n")
 
     # We need some information first!
 
     profile = {}
 
-    name = input("> First Name: ").lower()
+    name = input("> Imie: ").lower()
     while len(name) == 0 or name == " " or name == "  " or name == "   ":
-        print("\r\n[-] You must enter a name at least!")
-        name = input("> Name: ").lower()
+        print("\r\n[-] Daj przynajmniej imie!")
+        name = input("> Imie: ").lower()
     profile["name"] = str(name)
 
-    profile["surname"] = input("> Surname: ").lower()
-    profile["nick"] = input("> Nickname: ").lower()
-    birthdate = input("> Birthdate (DDMMYYYY): ")
+    profile["surname"] = input("> Nazwisko: ").lower()
+    profile["nick"] = input("> Ksywka: ").lower()
+    birthdate = input("> Data urodzenia (DDMMYYYY): ")
     while len(birthdate) != 0 and len(birthdate) != 8:
-        print("\r\n[-] You must enter 8 digits for birthday!")
-        birthdate = input("> Birthdate (DDMMYYYY): ")
+        print("\r\n[-] Potrzebuję 8 znaków!")
+        birthdate = input("> Data urodzenia (DDMMYYYY): ")
     profile["birthdate"] = str(birthdate)
 
     print("\r\n")
 
-    profile["wife"] = input("> Partners) name: ").lower()
-    profile["wifen"] = input("> Partners) nickname: ").lower()
-    wifeb = input("> Partners) birthdate (DDMMYYYY): ")
+    profile["wife"] = input("> Imię partnera/partnerki: ").lower()
+    profile["wifen"] = input("> Ksywka partnera/partnerki: ").lower()
+    wifeb = input("> Data urodzenia partnera/partnerki (DDMMYYYY): ")
     while len(wifeb) != 0 and len(wifeb) != 8:
-        print("\r\n[-] You must enter 8 digits for birthday!")
-        wifeb = input("> Partners birthdate (DDMMYYYY): ")
+        print("\r\n[-] Potrzebuję 8 znaków!")
+        wifeb = input("> Data urodzenia partnera/partnerki (DDMMYYYY): ")
     profile["wifeb"] = str(wifeb)
     print("\r\n")
 
-    profile["kid"] = input("> Child's name: ").lower()
-    profile["kidn"] = input("> Child's nickname: ").lower()
-    kidb = input("> Child's birthdate (DDMMYYYY): ")
+    profile["kid"] = input("> Imię dziecka: ").lower()
+    profile["kidn"] = input("> Ksywka dziecka: ").lower()
+    kidb = input("> Data urodzenia dziecka (DDMMYYYY): ")
     while len(kidb) != 0 and len(kidb) != 8:
-        print("\r\n[-] You must enter 8 digits for birthday!")
-        kidb = input("> Child's birthdate (DDMMYYYY): ")
+        print("\r\n[-] Potrzebuję 8 znaków!")
+        kidb = input("> Data urodzenia dziecka (DDMMYYYY): ")
     profile["kidb"] = str(kidb)
     print("\r\n")
 
-    profile["pet"] = input("> Pet's name: ").lower()
-    profile["company"] = input("> Company name: ").lower()
+    profile["pet"] = input("> Imię zwierzaka: ").lower()
+    profile["company"] = input("> Nazwa firmy: ").lower()
     print("\r\n")
 
     profile["words"] = [""]
     words1 = input(
-        "> Do you want to add some key words about the victim? Y/[N]: "
+        "> Znasz jeszcze jakieś przydatne słowa klucze? Y/[N]: "
     ).lower()
     words2 = ""
     if words1 == "y":
         words2 = input(
-            "> Please enter the words, separated by comma. [i.e. hacker,juice,black], spaces will be removed: "
+            "> Dodaj słowa klucze, dzielone przecinkiem [i.e. hacker,juice,black], spacje zostaną usunięte: "
         ).replace(" ", "")
     profile["words"] = words2.split(",")
 
     profile["spechars1"] = input(
-        "> Do you want to add special chars at the end of words? Y/[N]: "
+        "> Czy chcesz dodać specjalne znaki na końcu? Y/[N]: "
     ).lower()
 
     profile["randnum"] = input(
-        "> Do you want to add some random numbers at the end of words? Y/[N]:"
+        "> Czy chcesz dodać losowe liczby na końcu?  Y/[N]:"
     ).lower()
-    profile["leetmode"] = input("> Leet mode? (i.e. leet = 1337) Y/[N]: ").lower()
+    profile["leetmode"] = input("> Zamieniać litery na cyfry? (i.e. leet = 1337) Y/[N]: ").lower()
 
     generate_wordlist_from_profile(profile)  # generate the wordlist
 
@@ -391,7 +391,7 @@ def generate_wordlist_from_profile(profile):
                 for spec3 in chars:
                     profile["spechars"].append(spec1 + spec2 + spec3)
 
-    print("\r\n[+] Now making a dictionary...")
+    print("\r\n[+] Tworzenie słownika...")
 
     # Now me must do some string modifications...
 
@@ -643,7 +643,7 @@ def generate_wordlist_from_profile(profile):
         komb005 = list(komb(word, profile["spechars"]))
         komb006 = list(komb(reverse, profile["spechars"]))
 
-    print("[+] Sorting list and removing duplicates...")
+    print("[+] Sortowanie oraz usuwanie duplikatów...")
 
     komb_unique = {}
     for i in range(1, 22):
